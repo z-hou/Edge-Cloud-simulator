@@ -26,3 +26,4 @@ sh run.sh
 then you can go to the root path of the repo  
 
 python GUI_simulation.py
+![Gui](./img/GUI)
