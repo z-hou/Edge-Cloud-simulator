@@ -27,4 +27,4 @@ then you can go to the root path of the repo
 python GUI_simulation.py  
 Then the GUI would be displayed on the screen, you can set the parameters and go on with the simulation  
 
-![Gui](./img/GUI)
+![Gui](./img/GUI.png)
