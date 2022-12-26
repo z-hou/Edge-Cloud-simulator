@@ -20,19 +20,13 @@ class Simulation_Gui(QWidget):
     def __init__(self, parent=None):#
         super(Simulation_Gui, self).__init__(parent)
         self.setWindowTitle('Edge Cloud Simulation')
-        self.resize(1400, 900)
+        #self.resize(1400, 900)
 
         mainLayout = QHBoxLayout(self)
 
-        Basic_boxLayout = QGridLayout()
-
-        system_layout = QVBoxLayout()#
-        Cloud_boxLayout = QGridLayout()
-        Edge_boxLayout = QGridLayout()
+        Basic_boxLayout = QFormLayout()
         
-        all_resultLayout = QVBoxLayout()
         Visual_boxLayout = QGridLayout()
-        result_valueLayout = QGridLayout()
 
         font = QFont()   
         font.setPointSize(15)
@@ -46,36 +40,26 @@ class Simulation_Gui(QWidget):
         label_total_time = QLabel('Total Time:')
         self.time_input = QSpinBox()
         self.time_input.setMaximum(220)
-        self.time_input.setGeometry(100, 10, 160, 24)
         self.time_input.valueChanged.connect(self.detect_totaltime)
         
 
         label_init_lambda = QLabel('Initial lambda')
         self.Initial_lambda = QSpinBox()
-        self.Initial_lambda.setGeometry(100, 10, 160, 24)
         self.Initial_lambda.valueChanged.connect(self.detect_Initial_lambda)
 
         label_server_rate = QLabel('service rate')
         self.service_rate = QSpinBox()
-        self.service_rate.setGeometry(100, 10, 160, 24)
         self.service_rate.valueChanged.connect(self.detect_service_rate)
 
         label_severs_number = QLabel('severs number')
         self.severs_number = QSpinBox()
-        self.severs_number.setGeometry(100, 10, 160, 24)
         self.severs_number.valueChanged.connect(self.detect_severs_number)
-        
-        #lab_B.setStyleSheet("QLabel{background:yellow;}")
-        Basic_boxLayout.addWidget(lab_B, 0, 0)
-        Basic_boxLayout.addWidget(label_total_time, 1, 0)
-        Basic_boxLayout.addWidget(self.time_input, 1, 1)
-        Basic_boxLayout.addWidget(label_init_lambda, 2, 0)
-        Basic_boxLayout.addWidget(self.Initial_lambda, 2, 1)
-        Basic_boxLayout.addWidget(label_server_rate, 3, 0)
-        Basic_boxLayout.addWidget(self.service_rate, 3, 1)
-        Basic_boxLayout.addWidget(label_severs_number, 4, 0)
-        Basic_boxLayout.addWidget(self.severs_number, 4, 1)
-        #Basic_boxLayout.setSpacing(1)
+
+        Basic_boxLayout.addRow(lab_B)
+        Basic_boxLayout.addRow(label_total_time, self.time_input)
+        Basic_boxLayout.addRow(label_init_lambda, self.Initial_lambda)
+        Basic_boxLayout.addRow(label_server_rate, self.service_rate)
+        Basic_boxLayout.addRow(label_severs_number, self.severs_number)
         
         lab_C = QLabel('Cloud Configuration')
         lab_C.setFont(font)
@@ -83,7 +67,6 @@ class Simulation_Gui(QWidget):
         #lab_C.setStyleSheet("QLabel{background:yellow;}")
         label_rttC = QLabel('round-trip latency')
         self.rttC = QDoubleSpinBox()
-        self.rttC.setGeometry(100, 10, 160, 24)
         self.rttC.setDecimals(2)
         self.rttC.valueChanged.connect(self.detect_rttC)
         
@@ -99,28 +82,21 @@ class Simulation_Gui(QWidget):
 
         label_cov_CR = QLabel('request COV')
         self.cov_CR = QDoubleSpinBox()
-        self.cov_CR.setGeometry(100, 10, 160, 24)
         self.cov_CR.setDecimals(2)
         self.cov_CR.valueChanged.connect(self.detect_cov_CR)
 
         label_cov_CS = QLabel('service COV')
         self.cov_CS = QDoubleSpinBox()
-        self.cov_CS.setGeometry(100, 10, 160, 24)
         self.cov_CS.setDecimals(2)
         self.cov_CS.valueChanged.connect(self.detect_cov_CS)
+        
 
-        Cloud_boxLayout.addWidget(lab_C, 0, 0)
-        Cloud_boxLayout.addWidget(label_rttC, 1, 0)
-        Cloud_boxLayout.addWidget(self.rttC, 1, 1)
-        Cloud_boxLayout.addWidget(label_disttiCR, 2, 0)
-        Cloud_boxLayout.addWidget(self.dsrtiType_CR, 2, 1)
-        Cloud_boxLayout.addWidget(label_disttiCS, 3, 0)
-        Cloud_boxLayout.addWidget(self.dsrtiType_CS, 3, 1)
-        Cloud_boxLayout.addWidget(label_cov_CR, 4, 0)
-        Cloud_boxLayout.addWidget(self.cov_CR, 4, 1)
-        Cloud_boxLayout.addWidget(label_cov_CS, 5, 0)
-        Cloud_boxLayout.addWidget(self.cov_CS, 5, 1)
-        system_layout.addLayout(Cloud_boxLayout)
+        Basic_boxLayout.addRow(lab_C)
+        Basic_boxLayout.addRow(label_rttC, self.rttC)
+        Basic_boxLayout.addRow(label_disttiCR, self.dsrtiType_CR)
+        Basic_boxLayout.addRow(label_disttiCS, self.dsrtiType_CS)
+        Basic_boxLayout.addRow(label_cov_CR, self.cov_CR)
+        Basic_boxLayout.addRow(label_cov_CS, self.cov_CS)
 
         lab_E = QLabel('Edge Configuration')
         lab_E.setFont(font)
@@ -128,7 +104,6 @@ class Simulation_Gui(QWidget):
         #lab_C.setStyleSheet("QLabel{background:yellow;}")
         label_rttE = QLabel('round-trip latency')
         self.rttE = QDoubleSpinBox()
-        self.rttE.setGeometry(100, 10, 160, 24)
         self.rttE.setDecimals(2)
         self.rttE.valueChanged.connect(self.detect_rttE)
         
@@ -144,13 +119,11 @@ class Simulation_Gui(QWidget):
 
         label_cov_ER = QLabel('request COV')
         self.cov_ER = QDoubleSpinBox()
-        self.cov_ER.setGeometry(100, 10, 160, 24)
         self.cov_ER.setDecimals(2)
         self.cov_ER.valueChanged.connect(self.detect_cov_ER)
 
         label_cov_ES = QLabel('service COV')
         self.cov_ES = QDoubleSpinBox()
-        self.cov_ES.setGeometry(100, 10, 160, 24)
         self.cov_ES.setDecimals(2)
         self.cov_ES.valueChanged.connect(self.detect_cov_ES)
 
@@ -161,26 +134,17 @@ class Simulation_Gui(QWidget):
 
         self.btn1 = QPushButton("Start Simulation")
         self.btn1.clicked.connect(self.simulation)
-
-        Edge_boxLayout.addWidget(lab_E, 0, 0)
-        Edge_boxLayout.addWidget(label_rttE, 1, 0)
-        Edge_boxLayout.addWidget(self.rttE, 1, 1)
-        Edge_boxLayout.addWidget(label_disttiER, 2, 0)
-        Edge_boxLayout.addWidget(self.dsrtiType_ER, 2, 1)
-
-        Edge_boxLayout.addWidget(label_disttiES, 3, 0)
-        Edge_boxLayout.addWidget(self.dsrtiType_ES, 3, 1)
         
-        Edge_boxLayout.addWidget(label_cov_ER, 4, 0)
-        Edge_boxLayout.addWidget(self.cov_ER, 4, 1)
-        Edge_boxLayout.addWidget(label_cov_ES, 5, 0)
-        Edge_boxLayout.addWidget(self.cov_ES, 5, 1)
-        Edge_boxLayout.addWidget(label_wl_mode, 6, 0)
-        Edge_boxLayout.addWidget(self.wl_mode, 6, 1)
-        Edge_boxLayout.addWidget(self.btn1, 7, 1)
+        Basic_boxLayout.addRow(lab_E)
+        Basic_boxLayout.addRow(label_rttE, self.rttE)
+        Basic_boxLayout.addRow(label_disttiER, self.dsrtiType_ER)
+        Basic_boxLayout.addRow(label_disttiES, self.dsrtiType_ES)
+        Basic_boxLayout.addRow(label_cov_ER, self.cov_ER)
+        Basic_boxLayout.addRow(label_cov_ES, self.cov_ES)
+        Basic_boxLayout.addRow(label_wl_mode, self.wl_mode)
+        Basic_boxLayout.addWidget(self.btn1)
+        
 
-
-        system_layout.addLayout(Edge_boxLayout)
 
         lab_V = QLabel('Visualize')
         lab_V.setFont(font)
@@ -199,30 +163,20 @@ class Simulation_Gui(QWidget):
         self.sim_util_value = QLabel()
         self.sim_util_value.setText('')
         self.sim_util_value.setWordWrap(True)
+        
 
 
-
-        #lab_V.setStyleSheet("QLabel{background:yellow;}")
         Visual_boxLayout.addWidget(lab_V, 0, 0)
         Visual_boxLayout.addWidget(self.Label2, 1, 0, 1, 2)
-        Visual_boxLayout.addWidget(label_therotic_util, 2, 0)
-        Visual_boxLayout.addWidget(self.theo_util_value, 2, 1)
-        Visual_boxLayout.addWidget(label_simulate_util, 3, 0)
-        Visual_boxLayout.addWidget(self.sim_util_value, 3, 1)
 
-        result_valueLayout.addWidget(label_therotic_util, 0, 0, 2, 1)
-        result_valueLayout.addWidget(self.theo_util_value, 0, 1, 2, 1)
-        result_valueLayout.addWidget(label_simulate_util, 1, 0, 2, 1)
-        result_valueLayout.addWidget(self.sim_util_value, 1, 1, 2, 1)
-        all_resultLayout.addLayout(Visual_boxLayout)
-        all_resultLayout.addLayout(result_valueLayout)
+        
+        Basic_boxLayout.addRow(label_therotic_util, self.theo_util_value)
+        Basic_boxLayout.addRow(label_simulate_util, self.sim_util_value)
 
 
         
         mainLayout.addLayout(Basic_boxLayout)
-        mainLayout.addLayout(system_layout)
-        #mainLayout.addLayout(Visual_boxLayout)
-        mainLayout.addLayout(all_resultLayout)
+        mainLayout.addLayout(Visual_boxLayout)
 
         ###simulation input parameters:
         self.total_sim_time = 200
@@ -237,7 +191,7 @@ class Simulation_Gui(QWidget):
         self.cov_cloud_service = 0
 
         self.edge_rtt = 0
-        self.edge_Rdata_distr = 'expntl'
+        self.edge_Rdata_distr = 'norm'
         self.edge_Sdata_distr = 'expntl'
         self.edge_wl_mode = 'balance'
         self.cov_edge_request = 0
@@ -398,12 +352,10 @@ class Simulation_Gui(QWidget):
 
 
 
-
-
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     demo = Simulation_Gui()
     demo.show()
     sys.exit(app.exec_())
+
 
